@@ -13,6 +13,7 @@ struct Plant {
 typedef struct Plant plant;
 
 int check(plant p, float target_height);
+void print(plant p);
 
 int main() {
     setlocale(LC_ALL, "RUS");
@@ -64,12 +65,21 @@ int main() {
     printf("\nВведите минимальную высоту для поиска: ");
     scanf("%f", &target_height);
     printf("\n");
-    printf("Подходящие растения:\n");
+    printf("Подходящие растения:\n\n");
 
     
-    if (check(p1, target_height)) found = 1;
-    if (check(p2, target_height)) found = 1;
-    if (check(p3, target_height)) found = 1;
+    if (check(p1, target_height)) {
+        found = 1;
+        print(p1);
+    }
+    if (check(p2, target_height)) {
+        found = 1;
+        print(p2);
+    }
+    if (check(p3, target_height)) {
+        found = 1;
+        print(p3);
+    }
 
     if (found == 0) printf("Таких растений нет.\n");
 
@@ -77,14 +87,16 @@ int main() {
 }
 
 int check(plant p, float target_height) {
-    if (p.watering <= 5 && p.height > target_height) {
-        printf("Название: %s\n", p.name);
-        printf("Вид: %s\n", p.species);
-        printf("Дата посадки: %s\n", p.date);
-        printf("Высота: %.1f см\n", p.height);
-        printf("Частота полива: раз в %d дн.\n", p.watering);
-        printf("\n");
+    if (p.watering <= 5 && p.height > target_height) 
         return 1;
-    }
     return 0;
+}
+
+void print(plant p) {
+    printf("Название: %s\n", p.name);
+    printf("Вид: %s\n", p.species);
+    printf("Дата посадки: %s\n", p.date);
+    printf("Высота: %.1f см\n", p.height);
+    printf("Частота полива: раз в %d дн.\n", p.watering);
+    printf("\n");
 }
